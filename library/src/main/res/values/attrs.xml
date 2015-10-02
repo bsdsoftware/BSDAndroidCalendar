@@ -22,6 +22,14 @@
       <enum name="Eee" value="9"/>
       <enum name="Eeee" value="10"/>
     </attr>
+    <attr name="tsquare_titleMonthToUpperCase" format="boolean" />
+    <attr name="tsquare_headerDayWeekBackgroundDrawable" format="integer" />
+    <attr name="tsquare_headerDayWeekBackgroundColor" format="color" />
+    <attr name="tsquare_gravityTitleMonth" format="enum" >
+      <enum name="center" value="0" />
+      <enum name="right" value="1" />
+      <enum name="left" value="2" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="calendar_cell">

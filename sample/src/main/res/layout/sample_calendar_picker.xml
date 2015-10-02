@@ -79,8 +79,13 @@
       android:scrollbarStyle="outsideOverlay"
       android:clipToPadding="false"
       android:background="#FFFFFF"
+      app:tsquare_dividerColor="@color/transparent"
         app:tsquare_cellDisabledColor="@color/transparent"
-        app:tsquare_formatDayNameHeaderWeek="EE"
+        app:tsquare_formatDayNameHeaderWeek="E"
+        app:tsquare_titleMonthToUpperCase="true"
+        app:tsquare_headerDayWeekBackgroundDrawable="@drawable/border_bottom"
+        app:tsquare_gravityTitleMonth="left"
+
       />
   <Button
       android:id="@+id/done_button"

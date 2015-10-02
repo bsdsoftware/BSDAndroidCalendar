@@ -7,7 +7,10 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +104,9 @@ public class CalendarPickerView extends ListView {
     private int colorCellDisabled = -1;
     private FormatDayName formatDayName = FormatDayName.E;
     private boolean titleMonthToUpper = false;
-
+    private int gravityTitleHeaderMonth = Gravity.CENTER;
+    private Drawable headerDayWeekBackgroundDrawable = null;
+    private int headerDayWeekBackgroundColor = -1;
 
 
 
@@ -138,8 +143,28 @@ public class CalendarPickerView extends ListView {
     colorCellDisabled = a.getInt(R.styleable.CalendarPickerView_tsquare_cellDisabledColor, -1);
       int enumFormatDayName = a.getInt(R.styleable.CalendarPickerView_tsquare_formatDayNameHeaderWeek, 0);
       formatDayName = FormatDayName.values()[enumFormatDayName];
-
-
+      titleMonthToUpper = a.getBoolean(R.styleable.CalendarPickerView_tsquare_titleMonthToUpperCase, false);
+      int gravity = a.getInt(R.styleable.CalendarPickerView_tsquare_gravityTitleMonth, 0);
+      switch (gravity){
+          case 0:
+              gravityTitleHeaderMonth = Gravity.CENTER;
+              break;
+          case 1:
+              gravityTitleHeaderMonth = Gravity.RIGHT;
+              break;
+          case 2:
+              gravityTitleHeaderMonth = Gravity.LEFT;
+              break;
+      }
+      int drawableHeaderDayWeekBackgroundDrawable = a.getResourceId(R.styleable.CalendarPickerView_tsquare_headerDayWeekBackgroundDrawable, -1);
+      headerDayWeekBackgroundColor = a.getInt(R.styleable.CalendarPickerView_tsquare_headerDayWeekBackgroundColor, -1);
+      if(drawableHeaderDayWeekBackgroundDrawable != -1) {
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+              headerDayWeekBackgroundDrawable = getResources().getDrawable(drawableHeaderDayWeekBackgroundDrawable, context.getTheme());
+          } else {
+              headerDayWeekBackgroundDrawable = getResources().getDrawable(drawableHeaderDayWeekBackgroundDrawable);
+          }
+      }
 
     a.recycle();
 
@@ -772,12 +797,12 @@ public class CalendarPickerView extends ListView {
         monthView =
             MonthView.create(parent, inflater, formatDayName, listener, today, dividerColor,
                 dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader,
-                headerTextColor, decorators, locale, colorCellDisabled);
+                headerTextColor, decorators, locale, colorCellDisabled, headerDayWeekBackgroundDrawable, headerDayWeekBackgroundColor);
       } else {
         monthView.setDecorators(decorators);
       }
       monthView.init(months.get(position), cells.get(position), displayOnly, titleTypeface,
-          dateTypeface, titleMonthToUpper);
+          dateTypeface, titleMonthToUpper, gravityTitleHeaderMonth);
       return monthView;
     }
   }
@@ -898,6 +923,22 @@ public class CalendarPickerView extends ListView {
 
     public void setFormatDayName(FormatDayName formatDayName) {
         this.formatDayName = formatDayName;
+    }
+
+    public void setTitleMonthToUpper(boolean titleMonthToUpper) {
+        this.titleMonthToUpper = titleMonthToUpper;
+    }
+
+    public void setGravityTitleHeaderMonth(int gravityTitleHeaderMonth) {
+        this.gravityTitleHeaderMonth = gravityTitleHeaderMonth;
+    }
+
+    public void setHeaderDayWeekBackgroundColor(int headerDayWeekBackgroundColor) {
+        this.headerDayWeekBackgroundColor = headerDayWeekBackgroundColor;
+    }
+
+    public void setHeaderDayWeekBackgroundDrawable(Drawable headerDayWeekBackgroundDrawable) {
+        this.headerDayWeekBackgroundDrawable = headerDayWeekBackgroundDrawable;
     }
 
     /**

@@ -4,7 +4,9 @@ package com.squareup.timessquare;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -29,16 +31,16 @@ public class MonthView extends LinearLayout {
   public static MonthView create(ViewGroup parent, LayoutInflater inflater,
        FormatDayName formatDayName, Listener listener, Calendar today, int dividerColor,
       int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
-      int headerTextColor, Locale locale, int colorCellDisabled) {
+      int headerTextColor, Locale locale, int colorCellDisabled, Drawable headerDayWeekBackgroundDrawable, int headerDayWeekBackgroundColor) {
     return create(parent, inflater, formatDayName, listener, today, dividerColor,
         dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader, headerTextColor, null,
-        locale, colorCellDisabled);
+        locale, colorCellDisabled,headerDayWeekBackgroundDrawable,headerDayWeekBackgroundColor);
   }
 
   public static MonthView create(ViewGroup parent, LayoutInflater inflater,
       FormatDayName formatDayName, Listener listener, Calendar today, int dividerColor,
       int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
-      int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale, int colorCellDisabled) {
+      int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale, int colorCellDisabled, Drawable headerDayWeekBackgroundDrawable, int headerDayWeekBackgroundColor) {
 
     final MonthView view = (MonthView) inflater.inflate(R.layout.month, parent, false);
     view.setDividerColor(dividerColor);
@@ -65,6 +67,16 @@ public class MonthView extends LinearLayout {
     today.set(Calendar.DAY_OF_WEEK, originalDayOfWeek);
     view.listener = listener;
     view.decorators = decorators;
+    if(headerDayWeekBackgroundDrawable != null) {
+      if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+        headerRow.setBackgroundDrawable(headerDayWeekBackgroundDrawable);
+      } else {
+        headerRow.setBackground(headerDayWeekBackgroundDrawable);
+      }
+    }
+    else if(headerDayWeekBackgroundColor!=-1) {
+      headerRow.setBackgroundColor(headerDayWeekBackgroundColor);
+    }
     return view;
   }
 
@@ -149,13 +161,16 @@ public class MonthView extends LinearLayout {
   }
 
   public void init(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
-      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, boolean toUpper) {
+      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, boolean toUpper, int gravityTitleMonthHeader) {
     Logr.d("Initializing MonthView (%d) for %s", System.identityHashCode(this), month);
     long start = System.currentTimeMillis();
     String monthLabel = month.getLabel();
     if(toUpper)
       monthLabel = monthLabel.toUpperCase();
     title.setText(monthLabel);
+    if(gravityTitleMonthHeader!=-1){
+      title.setGravity(Gravity.LEFT);
+    }
 
     final int numRows = cells.size();
     grid.setNumRows(numRows);
