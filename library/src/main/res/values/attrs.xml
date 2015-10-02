@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="CalendarPickerView">
+    <attr name="android:background"/>
+    <attr name="tsquare_dividerColor" format="color"/>
+    <attr name="tsquare_dayBackground" format="reference"/>
+    <attr name="tsquare_dayTextColor" format="color"/>
+    <attr name="tsquare_titleTextColor" format="color"/>
+    <attr name="tsquare_displayHeader" format="boolean"/>
+    <attr name="tsquare_headerTextColor" format="color"/>
+    <attr name="tsquare_cellDisabledColor" format="color"/>
+    <attr name="tsquare_formatDayNameHeaderWeek" format="enum">
+      <enum name="E" value="0"/>
+      <enum name="EE" value="1"/>
+      <enum name="EEE" value="2"/>
+      <enum name="EEEE" value="3"/>
+      <enum name="e" value="4"/>
+      <enum name="ee" value="5"/>
+      <enum name="eee" value="6"/>
+      <enum name="eeee" value="7"/>
+      <enum name="Ee" value="8"/>
+      <enum name="Eee" value="9"/>
+      <enum name="Eeee" value="10"/>
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="calendar_cell">
+    <attr name="tsquare_state_selectable" format="boolean" />
+    <attr name="tsquare_state_current_month" format="boolean" />
+    <attr name="tsquare_state_today" format="boolean" />
+    <attr name="tsquare_state_range_first" format="boolean" />
+    <attr name="tsquare_state_range_middle" format="boolean" />
+    <attr name="tsquare_state_range_last" format="boolean" />
+    <attr name="tsquare_state_highlighted" format="boolean" />
+  </declare-styleable>
+
+
+  <!--<declare-styleable name="MonthView">
+    <attr name="tsquare_cellDisabledColor" format="color"/>
+  </declare-styleable>-->
+</resources>
