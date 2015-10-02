@@ -107,8 +107,8 @@ public class CalendarPickerView extends ListView {
     private int gravityTitleHeaderMonth = Gravity.CENTER;
     private Drawable headerDayWeekBackgroundDrawable = null;
     private int headerDayWeekBackgroundColor = -1;
-
-
+    private int typefaceHeaderDayWeek = Typeface.NORMAL;
+    private int typefaceCellDays = Typeface.NORMAL;
 
 
   public void setDecorators(List<CalendarCellDecorator> decorators) {
@@ -165,7 +165,10 @@ public class CalendarPickerView extends ListView {
               headerDayWeekBackgroundDrawable = getResources().getDrawable(drawableHeaderDayWeekBackgroundDrawable);
           }
       }
-
+      int enumTypefaceHeaderWeekDay = a.getInt(R.styleable.CalendarPickerView_tsquare_typefaceHeaderDayWeek, 0);
+      typefaceHeaderDayWeek = getTypeface(enumTypefaceHeaderWeekDay);
+      int enumTypefaceCellDays = a.getInt(R.styleable.CalendarPickerView_tsquare_typefaceCellDays, 0);
+      typefaceCellDays = getTypeface(enumTypefaceCellDays);
     a.recycle();
 
     adapter = new MonthAdapter();
@@ -190,6 +193,25 @@ public class CalendarPickerView extends ListView {
           .withSelectedDate(new Date());
     }
   }
+
+    private int getTypeface(int pos){
+        int typeface = Typeface.NORMAL;
+        switch (pos){
+            case 0:
+                typeface = Typeface.NORMAL;
+                break;
+            case 1:
+                typeface = Typeface.BOLD;
+                break;
+            case 2:
+                typeface = Typeface.ITALIC;
+                break;
+            case 3:
+                typeface = Typeface.BOLD_ITALIC;
+                break;
+        }
+        return typeface;
+    }
 
   /**
    * Both date parameters must be non-null and their {@link Date#getTime()} must not return 0. Time
@@ -797,12 +819,12 @@ public class CalendarPickerView extends ListView {
         monthView =
             MonthView.create(parent, inflater, formatDayName, listener, today, dividerColor,
                 dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader,
-                headerTextColor, decorators, locale, colorCellDisabled, headerDayWeekBackgroundDrawable, headerDayWeekBackgroundColor);
+                headerTextColor, decorators, locale, colorCellDisabled, headerDayWeekBackgroundDrawable, headerDayWeekBackgroundColor, typefaceHeaderDayWeek);
       } else {
         monthView.setDecorators(decorators);
       }
       monthView.init(months.get(position), cells.get(position), displayOnly, titleTypeface,
-          dateTypeface, titleMonthToUpper, gravityTitleHeaderMonth);
+          dateTypeface, titleMonthToUpper, gravityTitleHeaderMonth, typefaceCellDays);
       return monthView;
     }
   }
@@ -939,6 +961,14 @@ public class CalendarPickerView extends ListView {
 
     public void setHeaderDayWeekBackgroundDrawable(Drawable headerDayWeekBackgroundDrawable) {
         this.headerDayWeekBackgroundDrawable = headerDayWeekBackgroundDrawable;
+    }
+
+    public void setTypefaceCellDays(int typefaceCellDays) {
+        this.typefaceCellDays = typefaceCellDays;
+    }
+
+    public void setTypefaceHeaderDayWeek(int typefaceHeaderDayWeek) {
+        this.typefaceHeaderDayWeek = typefaceHeaderDayWeek;
     }
 
     /**

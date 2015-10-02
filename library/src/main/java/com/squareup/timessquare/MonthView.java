@@ -31,16 +31,16 @@ public class MonthView extends LinearLayout {
   public static MonthView create(ViewGroup parent, LayoutInflater inflater,
        FormatDayName formatDayName, Listener listener, Calendar today, int dividerColor,
       int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
-      int headerTextColor, Locale locale, int colorCellDisabled, Drawable headerDayWeekBackgroundDrawable, int headerDayWeekBackgroundColor) {
+      int headerTextColor, Locale locale, int colorCellDisabled, Drawable headerDayWeekBackgroundDrawable, int headerDayWeekBackgroundColor, int typefaceHeaderDayWeek) {
     return create(parent, inflater, formatDayName, listener, today, dividerColor,
         dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader, headerTextColor, null,
-        locale, colorCellDisabled,headerDayWeekBackgroundDrawable,headerDayWeekBackgroundColor);
+        locale, colorCellDisabled,headerDayWeekBackgroundDrawable,headerDayWeekBackgroundColor,typefaceHeaderDayWeek);
   }
 
   public static MonthView create(ViewGroup parent, LayoutInflater inflater,
       FormatDayName formatDayName, Listener listener, Calendar today, int dividerColor,
       int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
-      int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale, int colorCellDisabled, Drawable headerDayWeekBackgroundDrawable, int headerDayWeekBackgroundColor) {
+      int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale, int colorCellDisabled, Drawable headerDayWeekBackgroundDrawable, int headerDayWeekBackgroundColor, int typefaceHeaderDayWeek) {
 
     final MonthView view = (MonthView) inflater.inflate(R.layout.month, parent, false);
     view.setDividerColor(dividerColor);
@@ -63,6 +63,8 @@ public class MonthView extends LinearLayout {
       final TextView textView = (TextView) headerRow.getChildAt(offset);
       String dayName = getDayString(today, formatDayName);
       textView.setText(dayName);
+
+      textView.setTypeface(null, typefaceHeaderDayWeek);
     }
     today.set(Calendar.DAY_OF_WEEK, originalDayOfWeek);
     view.listener = listener;
@@ -161,7 +163,7 @@ public class MonthView extends LinearLayout {
   }
 
   public void init(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
-      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, boolean toUpper, int gravityTitleMonthHeader) {
+      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, boolean toUpper, int gravityTitleMonthHeader, int typefaceCellDays) {
     Logr.d("Initializing MonthView (%d) for %s", System.identityHashCode(this), month);
     long start = System.currentTimeMillis();
     String monthLabel = month.getLabel();
@@ -199,6 +201,7 @@ public class MonthView extends LinearLayout {
           cellView.setRangeState(cell.getRangeState());
           cellView.setHighlighted(cell.isHighlighted());
           cellView.setTag(cell);
+          cellView.setTypeface(null, typefaceCellDays);
 
           if (null != decorators) {
             for (CalendarCellDecorator decorator : decorators) {

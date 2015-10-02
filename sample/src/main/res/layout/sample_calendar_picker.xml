@@ -79,13 +79,18 @@
       android:scrollbarStyle="outsideOverlay"
       android:clipToPadding="false"
       android:background="#FFFFFF"
+      android:horizontalSpacing="16dp"
+      android:verticalSpacing="8dp"
       app:tsquare_dividerColor="@color/transparent"
         app:tsquare_cellDisabledColor="@color/transparent"
         app:tsquare_formatDayNameHeaderWeek="E"
         app:tsquare_titleMonthToUpperCase="true"
         app:tsquare_headerDayWeekBackgroundDrawable="@drawable/border_bottom"
-        app:tsquare_gravityTitleMonth="left"
-
+        app:tsquare_gravityTitleMonth="right"
+        app:tsquare_dayBackground="@drawable/my_calendar_bg_selector"
+        app:tsquare_dayTextColor="@color/my_custom_calendar_text_selector"
+        app:tsquare_typefaceHeaderDayWeek="bold"
+        app:tsquare_typefaceCellDays="normal"
       />
   <Button
       android:id="@+id/done_button"

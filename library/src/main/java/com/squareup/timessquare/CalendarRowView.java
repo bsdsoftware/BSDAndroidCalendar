@@ -69,10 +69,10 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
   }
 
   @Override public void onClick(View v) {
-
+/*
     if (listener != null) {
       listener.handleClick((MonthCellDescriptor) v.getTag());
-    }
+    }*/
   }
 
   public void setListener(MonthView.Listener listener) {
