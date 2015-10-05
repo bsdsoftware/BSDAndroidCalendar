@@ -11,7 +11,7 @@ Esempio di utilizzo nel progetto CNA Bologna.
 Utilizzo
 -----
 
-Includi `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
+Includere `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
 
 ```xml
 <com.squareup.timessquare.CalendarPickerView
