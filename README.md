@@ -15,6 +15,7 @@ Includi `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
 
 ```xml
 <com.squareup.timessquare.CalendarPickerView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,9 +24,11 @@ Includi `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
 
 ```xml
 <com.squareup.timessquare.CalendarPickerGridView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:numColumns="4"
     />
 ```
 
