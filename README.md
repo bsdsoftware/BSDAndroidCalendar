@@ -8,7 +8,7 @@ Ho solo aggiunto delle funzionalità, perciò per vedere un utilizzo completo ve
 
 Esempio di utilizzo nel progetto CNA Bologna.
 
-Usage
+Utilizzo
 -----
 
 Includi `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
@@ -21,6 +21,7 @@ Includi `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
     />
 ```
 
+```xml
 <com.squareup.timessquare.CalendarPickerGridView
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
@@ -28,31 +29,52 @@ Includi `CalendarPickerView` oppure `CalendarPickerGridView` nel layout XML.
     />
 ```
 
-This is a fairly large control so it is wise to give it ample space in your layout. On small
-devices it is recommended to use a dialog, full-screen fragment, or dedicated activity. On larger
-devices like tablets, displaying full-screen is not recommended. A fragment occupying part of the
-layout or a dialog is a better choice.
+Rispetto alla libreria originale sono stati aggiunti alcuni parametri:
 
-In the `onCreate` of your activity/dialog or the `onCreateView` of your fragment, initialize the
-view with a range of valid dates as well as the currently selected date.
-
-```java
-Calendar nextYear = Calendar.getInstance();
-nextYear.add(Calendar.YEAR, 1);
-
-CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
-Date today = new Date();
-calendar.init(today, nextYear.getTime())
-    .withSelectedDate(today);
+```xml
+    app:tsquare_cellDisabledColor="@color/transparent"
 ```
+Colore di sfondo delle celle non del mese corrente.
 
-The default mode of the view is to have one selectable date.  If you want the user to be able to
-select multiple dates or a date range, use the inMode() method:
-
-```java
-calendar.init(today, nextYear.getTime())
-    .inMode(RANGE);
+```xml
+    app:tsquare_formatDayNameHeaderWeek="E"
 ```
+Formato del nome del giorno della settimana nell'hedear di ogni mese.
+Valori accettati: E, EE, EEE, EEEE, e, ee, eee, eeee, Ee, Eee, Eeee
+
+```xml
+    app:tsquare_titleMonthToUpperCase="true"
+```
+Trasforma l'header con il nome del mese in caratteri maiuscoli
+
+```xml
+    app:tsquare_headerDayWeekBackgroundDrawable="@drawable/border_bottom"
+```
+Mette un drawable di sfondo all'header con i nomi dei giorni della settimana 
+
+```xml
+    app:tsquare_headerDayWeekBackgroundColor="@color/blue"
+```
+Mette un colore di sfondo all'header con i nomi dei giorni della settimana 
+
+```xml
+    app:tsquare_gravityTitleMonth="right"
+```
+Applica il gravity all'header con il nome del mese.
+Valori accettati: left, right, center
+
+```xml
+    app:tsquare_typefaceHeaderDayWeek="bold"
+```
+Applica all'header con il nome dei giorni della settimana uno stile. 
+
+```xml
+    app:tsquare_typefaceCellDays="normal"
+```
+Applica ai numeri nelle celle con il numero del giorno uno stile.
+
+Questi ultimi due stili possono essere:
+bold, italic, normal, bold_italic
 
 
 Download
