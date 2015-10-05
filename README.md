@@ -41,6 +41,7 @@ Colore di sfondo delle celle non del mese corrente.
 ```
 Formato del nome del giorno della settimana nell'hedear di ogni mese.
 Valori accettati: E, EE, EEE, EEEE, e, ee, eee, eeee, Ee, Eee, Eeee
+(esempi: L, LU, LUN, LUNEDI', l, lu, lun, lunedì, Lu, Lun, Lunedì)
 
 ```xml
     app:tsquare_titleMonthToUpperCase="true"
@@ -80,7 +81,7 @@ bold, italic, normal, bold_italic
 Download
 --------
 
-Aggiungi al repository il percorso:
+Aggiungere al repository il percorso:
 ```groovy
 repositories {
         jcenter()
