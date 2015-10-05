@@ -1,9 +1,10 @@
-TimesSquare for Android
+BSD Android Calendar
 ==========================
 
-Standalone Android widget for picking a single date from a calendar view.
+Calendario Android basato sulla libreria https://github.com/square/android-times-square 
 
-![Screenshot](timesSquareScreenshot.png)
+Ci sono due tipi di calendario, uno some ListView e uno come GridView
+Ho solo aggiunto delle funzionalità, perciò per vedere un utilizzo completo vedere nella pagina della libreria originale.
 
 
 Usage
