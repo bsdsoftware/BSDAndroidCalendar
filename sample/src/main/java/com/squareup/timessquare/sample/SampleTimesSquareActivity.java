@@ -46,12 +46,23 @@ public class SampleTimesSquareActivity extends Activity {
     calendar.init(lastYear.getTime(), nextYear.getTime()) //
         .inMode(SelectionMode.SINGLE) //
         .withSelectedDate(new Date());
-    calendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
+      @Override
+      public void onDateSelected(Date date) {
+        Toast.makeText(SampleTimesSquareActivity.this, "click " + date.toString(), Toast.LENGTH_LONG).show();
+      }
+
+      @Override
+      public void onDateUnselected(Date date) {
+
+      }
+    });
+ /*   calendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(SampleTimesSquareActivity.this, "click month", Toast.LENGTH_LONG).show();
       }
-    });
+    });*/
 
     initButtonListeners(nextYear, lastYear);
   }
