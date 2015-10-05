@@ -54,8 +54,4 @@
     <attr name="tsquare_state_highlighted" format="boolean" />
   </declare-styleable>
 
-
-  <!--<declare-styleable name="MonthView">
-    <attr name="tsquare_cellDisabledColor" format="color"/>
-  </declare-styleable>-->
 </resources>

@@ -824,7 +824,7 @@ public class CalendarPickerView extends ListView {
         monthView.setDecorators(decorators);
       }
       monthView.init(months.get(position), cells.get(position), displayOnly, titleTypeface,
-          dateTypeface, titleMonthToUpper, gravityTitleHeaderMonth, typefaceCellDays);
+          dateTypeface, titleMonthToUpper, gravityTitleHeaderMonth, typefaceCellDays, false);
       return monthView;
     }
   }

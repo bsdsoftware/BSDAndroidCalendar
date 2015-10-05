@@ -163,7 +163,7 @@ public class MonthView extends LinearLayout {
   }
 
   public void init(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
-      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, boolean toUpper, int gravityTitleMonthHeader, int typefaceCellDays) {
+      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, boolean toUpper, int gravityTitleMonthHeader, int typefaceCellDays, boolean isGridView) {
     Logr.d("Initializing MonthView (%d) for %s", System.identityHashCode(this), month);
     long start = System.currentTimeMillis();
     String monthLabel = month.getLabel();
@@ -178,8 +178,8 @@ public class MonthView extends LinearLayout {
     grid.setNumRows(numRows);
     for (int i = 0; i < 6; i++) {
       CalendarRowView weekRow = (CalendarRowView) grid.getChildAt(i + 1);
-      weekRow.setListener(listener);
       if (i < numRows) {
+        weekRow.setListener(listener);
         weekRow.setVisibility(VISIBLE);
         List<MonthCellDescriptor> week = cells.get(i);
         for (int c = 0; c < week.size(); c++) {
@@ -210,7 +210,15 @@ public class MonthView extends LinearLayout {
           }
         }
       } else {
-        weekRow.setVisibility(GONE);
+        if(!isGridView) {
+          weekRow.setVisibility(GONE);
+        }else{
+          for (int c = 0; c < weekRow.getChildCount(); c++) {
+            CalendarCellView cellView = (CalendarCellView) weekRow.getChildAt(c);
+            cellView.setColorCellDisabled(colorCellDisabled);
+            cellView.setEnabled(false);
+          }
+        }
       }
     }
 

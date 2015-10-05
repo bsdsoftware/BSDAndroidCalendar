@@ -3,6 +3,7 @@ package com.squareup.timessquare.sample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,13 +58,6 @@ public class SampleTimesSquareActivity extends Activity {
 
       }
     });
- /*   calendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(SampleTimesSquareActivity.this, "click month", Toast.LENGTH_LONG).show();
-      }
-    });*/
-
     initButtonListeners(nextYear, lastYear);
   }
 
@@ -76,17 +70,19 @@ public class SampleTimesSquareActivity extends Activity {
     final Button customized = (Button) findViewById(R.id.button_customized);
     final Button decorator = (Button) findViewById(R.id.button_decorator);
     final Button rtl = (Button) findViewById(R.id.button_rtl);
+    final Button grid = (Button) findViewById(R.id.button_grid);
 
     modeButtons.addAll(Arrays.asList(single, multi, range, displayOnly, decorator));
 
     single.setOnClickListener(new OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         setButtonsEnabled(single);
 
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(lastYear.getTime(), nextYear.getTime()) //
-            .inMode(SelectionMode.SINGLE) //
-            .withSelectedDate(new Date());
+                .inMode(SelectionMode.SINGLE) //
+                .withSelectedDate(new Date());
       }
     });
 
@@ -170,6 +166,14 @@ public class SampleTimesSquareActivity extends Activity {
         dialogView.init(lastYear.getTime(), nextYear.getTime(), new Locale("iw", "IL")) //
             .withSelectedDate(new Date());
       }
+    });
+
+    grid.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(SampleTimesSquareActivity.this, SampleCalendarGridActivity.class);
+            startActivity(intent);
+        }
     });
 
     findViewById(R.id.done_button).setOnClickListener(new OnClickListener() {
